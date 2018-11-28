@@ -5,15 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Em4325GUIdemo"
         mc:Ignorable="d"
-        Title="AccelDemoGUI" Height="233" Width="510">
+        Title="AccelDemoGUI" Height="233" Width="739.5">
     <Grid>
-        <ProgressBar x:Name="xBar" HorizontalAlignment="Left" Height="18" Margin="86,58,0,0" VerticalAlignment="Top" Width="343"/>
-        <ProgressBar x:Name="yBar" HorizontalAlignment="Left" Height="18" Margin="86,81,0,0" VerticalAlignment="Top" Width="343"/>
-        <ProgressBar x:Name="zBar" HorizontalAlignment="Left" Height="18" Margin="86,104,0,0" VerticalAlignment="Top" Width="343"/>
-        <Button Content="Start" HorizontalAlignment="Left" Margin="200,141,0,0" VerticalAlignment="Top" Width="96" Height="34"/>
-        <Label Content="X Axis" HorizontalAlignment="Left" Margin="41,55,0,0" VerticalAlignment="Top" Height="21" FontSize="10"/>
-        <Label Content="Y Axis" HorizontalAlignment="Left" Margin="41,81,0,0" VerticalAlignment="Top" Height="21" FontSize="10"/>
-        <Label Content="Z Axis" HorizontalAlignment="Left" Margin="41,104,0,0" VerticalAlignment="Top" Height="21" FontSize="10"/>
+        <ProgressBar x:Name="xBar" HorizontalAlignment="Left" Height="18" Margin="86,58,0,0" VerticalAlignment="Top" Width="343" Foreground="#FFB00606"/>
+        <ProgressBar x:Name="yBar" HorizontalAlignment="Left" Height="18" Margin="86,81,0,0" VerticalAlignment="Top" Width="343" Foreground="#FFB00606"/>
+        <ProgressBar x:Name="zBar" HorizontalAlignment="Left" Height="18" Margin="86,104,0,0" VerticalAlignment="Top" Width="343" Foreground="#FFB00606"/>
+        <Button x:Name="startButton" Content="Start" HorizontalAlignment="Left" Margin="86,135,0,0" VerticalAlignment="Top" Width="96" Height="34" Click="Button_Click"/>
+        <Label x:Name="x1" Content="X Axis" HorizontalAlignment="Left" Margin="238,57,0,0" VerticalAlignment="Top" Height="21" FontSize="10"/>
+        <Label x:Name="y1" Content="Y Axis" HorizontalAlignment="Left" Margin="238,78,0,0" VerticalAlignment="Top" Height="21" FontSize="10"/>
+        <Label x:Name="z1" Content="Z Axis" HorizontalAlignment="Left" Margin="238,102,0,0" VerticalAlignment="Top" Height="21" FontSize="10"/>
+        <Button x:Name="stopButton" Content="Stop" HorizontalAlignment="Left" Margin="333,135,0,0" VerticalAlignment="Top" Width="96" Height="34" Click="Button_Click_Stop"/>
+        <Label x:Name="xVaue" Content="" HorizontalAlignment="Left" Margin="434,55,0,0" VerticalAlignment="Top" Height="21" Width="12"/>
+        <Label x:Name="yValue" Content="" HorizontalAlignment="Left" Margin="434,81,0,0" VerticalAlignment="Top" Height="21" Width="12"/>
+        <Label x:Name="zValue" Content="" HorizontalAlignment="Left" Margin="434,102,0,0" VerticalAlignment="Top" Height="21" Width="12"/>
 
     </Grid>
 </Window>
+
+
