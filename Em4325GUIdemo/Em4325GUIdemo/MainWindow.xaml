@@ -3,10 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:d3="http://research.microsoft.com/DynamicDataDisplay/1.0"
+        xmlns:oxy="http://oxyplot.org/wpf"
         xmlns:local="clr-namespace:Em4325GUIdemo"
         mc:Ignorable="d"
-        Title="AccelDemoGUI" Height="233" Width="739.5">
+        Title="AccelDemoGUI" Height="522" Width="911.5">
     <Grid>
+
+        
         <ProgressBar x:Name="xBar" HorizontalAlignment="Left" Height="18" Margin="86,58,0,0" VerticalAlignment="Top" Width="343" Foreground="#FFB00606"/>
         <ProgressBar x:Name="yBar" HorizontalAlignment="Left" Height="18" Margin="86,81,0,0" VerticalAlignment="Top" Width="343" Foreground="#FFB00606"/>
         <ProgressBar x:Name="zBar" HorizontalAlignment="Left" Height="18" Margin="86,104,0,0" VerticalAlignment="Top" Width="343" Foreground="#FFB00606"/>
@@ -18,7 +22,44 @@
         <Label x:Name="xVaue" Content="" HorizontalAlignment="Left" Margin="434,55,0,0" VerticalAlignment="Top" Height="21" Width="12"/>
         <Label x:Name="yValue" Content="" HorizontalAlignment="Left" Margin="434,81,0,0" VerticalAlignment="Top" Height="21" Width="12"/>
         <Label x:Name="zValue" Content="" HorizontalAlignment="Left" Margin="434,102,0,0" VerticalAlignment="Top" Height="21" Width="12"/>
+        <ProgressBar x:Name="xAccel" HorizontalAlignment="Left" Height="10" Margin="1,307,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.5,0.5">
+            <ProgressBar.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="270"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ProgressBar.RenderTransform>
+        </ProgressBar>
+        <ProgressBar x:Name="yAccel" HorizontalAlignment="Left" Height="10" Margin="13,307,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.5,0.5">
+            <ProgressBar.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="270"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ProgressBar.RenderTransform>
+        </ProgressBar>
+        <ProgressBar x:Name="zAccel" HorizontalAlignment="Left" Height="10" Margin="25,307,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.5,0.5">
+            <ProgressBar.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="270"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ProgressBar.RenderTransform>
+        </ProgressBar>
+        <d3:ChartPlotter x:Name="plotter" Margin="538,20,25,312">
 
+            <d3:Header FontFamily="Georgia" Content="X Accel"/>
+            <d3:VerticalAxisTitle FontFamily="Georgia" Content="Acceleration" />
+            <d3:HorizontalAxisTitle FontFamily="Georgia" Content="Time"/>
+            <d3:HorizontalLine Value="{Binding MaxVoltage}" Stroke="Red" StrokeThickness="2"/>
+            <d3:HorizontalLine Value="{Binding MinVoltage}" Stroke="Red" StrokeThickness="2"/>
+        </d3:ChartPlotter>
     </Grid>
 </Window>
 

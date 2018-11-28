@@ -16,39 +16,62 @@ using ThingMagic;
 using System.Threading;
 using System.Diagnostics;
 using System.Windows.Threading;
+using Microsoft.Research.DynamicDataDisplay.DataSources;
+using Microsoft.Research.DynamicDataDisplay;
+using System.ComponentModel;
+using Em4325GUIdemo.VoltageViewModel;
 
 namespace Em4325GUIdemo
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window , INotifyPropertyChanged
     {
 
         int xInt = 0;
         int yInt = 0;
         int zInt = 0;
-
-
+        int xPrevious = 0;
+        int yPrevious = 0;
+        int zPrevious = 0;
+        int counter = 0;
         String bufferX;
         String bufferY;
         String bufferZ;
-        private static System.Timers.Timer aTimer;
 
+     
+        
+        DispatcherTimer updateCollectionTimer;
+        private int i = 0;
+        public VoltagePointCollection voltagePointCollection;
+   
 
         public MainWindow()
         {
             InitializeComponent();
-           
+
+
+            updateCollectionTimer = new DispatcherTimer();
+            updateCollectionTimer.Interval = TimeSpan.FromMilliseconds(100);
+            updateCollectionTimer.Tick += new EventHandler(updateCollectionTimer_Tick);
+            updateCollectionTimer.Start();
         }
 
-    
+        void updateCollectionTimer_Tick(object sender, EventArgs e)
+        {
+            i++;
+            voltagePointCollection.Add(new VoltagePoint(xInt, DateTime.Now));
+        }
 
         public void Button_Click(object sender, RoutedEventArgs e)
         {
+            
+
             startButton.Content = "Connected";
             defaultSettings();
-            
+
+
         }
 
         public void defaultSettings()
@@ -88,18 +111,12 @@ namespace Em4325GUIdemo
           
             r.TagRead += delegate (Object sender, TagReadDataEventArgs e)
                 {
-                    
 
-                    //Debug.Print("I am here");
-                    String userMem = ByteFormat.ToHex(e.TagReadData.Data).ToString();  // convert the input into a hex string
-                   // Debug.Print(userMem);
-                    String abc = e.TagReadData.EpcString;
-                    Debug.Print(abc);
+                    String userMem = ByteFormat.ToHex(e.TagReadData.Data).ToString();  // convert the input into a hex string                   
+                    String abc = e.TagReadData.EpcString;                    
                     userMem.Trim();
-
                     int length = 4;
                     int substringposition = 2;
-
 
                     if (abc == "AAA2")
                     {
@@ -112,7 +129,7 @@ namespace Em4325GUIdemo
                             
                             substringposition = substringposition + length;
                             bufferX = xInt.ToString();
-                            Debug.Print(bufferX);
+                            
                             y = userMem.Substring(substringposition, length);
                             yInt = Convert.ToInt32(y, 16);
                             substringposition = substringposition + length;
@@ -122,12 +139,11 @@ namespace Em4325GUIdemo
                             zInt = Convert.ToInt32(z, 16);
                             substringposition = substringposition + length;
                             bufferZ = zInt.ToString();
-                            //updateText(xInt, yInt, zInt);
-                            Debug.Print(x + " " +  y + " " +  z);
-                           // updateProgressBars(xInt, yInt, zInt);
+                            plotter.AddLineGraph(xInt, Colors.Green, 2, "Volts");
+                            
 
-                           
-                        }
+                            counter++;
+                    }
                     }
 
                     Action action = delegate ()
@@ -154,31 +170,31 @@ namespace Em4325GUIdemo
 
 
         private void updateText()
-        {
-           
+        {           
             x1.Content = bufferX;
             y1.Content = bufferY;
             z1.Content = bufferZ;
-
-
         }
 
 
 
         public void updateProgressBars()
         {
-
-
-
-
-
-
-                xBar.Value = xInt;
-                yBar.Value = yInt;
+            xBar.Value = xInt;
+            yBar.Value = yInt;
                 zBar.Value = zInt;
-            
-                
-            
+
+            int changeX = Math.Abs(xPrevious - xInt);
+            int changeY = Math.Abs(yPrevious - yInt);
+            int changeZ = Math.Abs(zPrevious - zInt);
+
+            xAccel.Value = changeX * 5;
+            yAccel.Value = changeZ * 5;
+            zAccel.Value = changeZ * 5;
+
+            xPrevious = xInt;
+            yPrevious = yInt;
+            zPrevious = zInt;
             
 
         }
@@ -194,6 +210,7 @@ namespace Em4325GUIdemo
             Console.WriteLine("Error: " + e.ReaderException.Message);
         }
 
+        
 
         #region ParseAntennaList
 
@@ -220,6 +237,17 @@ namespace Em4325GUIdemo
 
             }
             return antennaList;
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanged members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                this.PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
         }
 
         #endregion
