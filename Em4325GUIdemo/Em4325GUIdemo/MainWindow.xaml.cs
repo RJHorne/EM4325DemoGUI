@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ThingMagic;
 
 namespace Em4325GUIdemo
 {
@@ -23,6 +24,7 @@ namespace Em4325GUIdemo
         public MainWindow()
         {
             InitializeComponent();
+            xBar.Value = 100;
         }
     }
 }

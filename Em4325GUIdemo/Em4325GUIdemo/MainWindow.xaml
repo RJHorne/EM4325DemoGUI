@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Em4325GUIdemo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="233" Width="510">
+        Title="AccelDemoGUI" Height="233" Width="510">
     <Grid>
-        <ProgressBar HorizontalAlignment="Left" Height="18" Margin="86,58,0,0" VerticalAlignment="Top" Width="343"/>
-        <ProgressBar HorizontalAlignment="Left" Height="18" Margin="86,81,0,0" VerticalAlignment="Top" Width="343"/>
-        <ProgressBar HorizontalAlignment="Left" Height="18" Margin="86,104,0,0" VerticalAlignment="Top" Width="343"/>
+        <ProgressBar x:Name="xBar" HorizontalAlignment="Left" Height="18" Margin="86,58,0,0" VerticalAlignment="Top" Width="343"/>
+        <ProgressBar x:Name="yBar" HorizontalAlignment="Left" Height="18" Margin="86,81,0,0" VerticalAlignment="Top" Width="343"/>
+        <ProgressBar x:Name="zBar" HorizontalAlignment="Left" Height="18" Margin="86,104,0,0" VerticalAlignment="Top" Width="343"/>
         <Button Content="Start" HorizontalAlignment="Left" Margin="200,141,0,0" VerticalAlignment="Top" Width="96" Height="34"/>
         <Label Content="X Axis" HorizontalAlignment="Left" Margin="41,55,0,0" VerticalAlignment="Top" Height="21" FontSize="10"/>
         <Label Content="Y Axis" HorizontalAlignment="Left" Margin="41,81,0,0" VerticalAlignment="Top" Height="21" FontSize="10"/>
